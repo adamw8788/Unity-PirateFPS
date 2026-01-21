@@ -16,6 +16,8 @@ public class ProjectileGunTutorial : MonoBehaviour
 
     private float nextFireTime;
 
+    public GunAnimation gunAnimator;
+
     void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -43,14 +45,25 @@ public class ProjectileGunTutorial : MonoBehaviour
 
     void Fire()
     {
-        Vector3 spawnPosition = playerCamera.transform.position;
-
-        // Ray through the center of the screen
+        // 1. Ray from center of the screen (true aim)
         Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-        Vector3 direction = ray.direction;
-        
-        direction.Normalize();
 
+        Vector3 targetPoint;
+        if (Physics.Raycast(ray, out RaycastHit hit, 100f))
+            targetPoint = hit.point;
+        else
+            targetPoint = ray.GetPoint(100f);
+
+        // 2. Offset spawn position (matches UI gun)
+        Vector3 spawnPosition =
+            playerCamera.transform.position +
+            (playerCamera.transform.forward * 0.5f) +
+            (playerCamera.transform.right * 0.35f);
+
+        // 3. Recalculate direction from spawn → target
+        Vector3 direction = (targetPoint - spawnPosition).normalized;
+
+        // 4. Spawn projectile
         GameObject projectile = Instantiate(
             projectilePrefab,
             spawnPosition,
@@ -60,7 +73,17 @@ public class ProjectileGunTutorial : MonoBehaviour
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
         rb.linearVelocity = direction * shootForce;
 
-        // Debug line
+        // 5. Ignore collision with player
+        Collider projCol = projectile.GetComponent<Collider>();
+        Collider playerCol = GetComponent<Collider>();
+        if (projCol && playerCol)
+            Physics.IgnoreCollision(projCol, playerCol);
+
+        // 6. UI recoil
+        gunAnimator?.PlayRecoil();
+
+        // Debug
         Debug.DrawRay(spawnPosition, direction * 5f, Color.red, 0.5f);
+        Debug.Log(direction);
     }
 }
