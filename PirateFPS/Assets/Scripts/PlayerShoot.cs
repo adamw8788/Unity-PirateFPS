@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,6 +18,8 @@ public class ProjectileGunTutorial : MonoBehaviour
     private float nextFireTime;
 
     public GunAnimation gunAnimator;
+
+    public GunExplosion gunExplosion;
 
     void Awake()
     {
@@ -81,6 +84,9 @@ public class ProjectileGunTutorial : MonoBehaviour
 
         // 6. UI recoil
         gunAnimator?.PlayRecoil();
+
+        // 7. UI gun explosion
+        gunExplosion?.Play();
 
         // Debug
         Debug.DrawRay(spawnPosition, direction * 5f, Color.red, 0.5f);

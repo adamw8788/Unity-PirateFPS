@@ -57,7 +57,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMove : MonoBehaviour
 {
-    public float playerSpeed = 10f;
+    public float playerSpeed = 15f;
     public float momentumDamping = 5f;
     public float gravity = -10f;
     public Animator camAnim;

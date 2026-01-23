@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: ee4d6f570ae5d0b4290b4bfbbeecd372, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 24092898}
   - component: {fileID: 24092899}
   - component: {fileID: 24092900}
+  - component: {fileID: 24092901}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -193,8 +194,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c061cc61770bf44395311ac9173d90b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
-  playerSpeed: 20
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMove
+  playerSpeed: 15
   momentumDamping: 5
   gravity: -10
   camAnim: {fileID: 330585548}
@@ -209,10 +210,10 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 18aec9c0b45cb8344aebd28e5af02436, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
+  m_EditorClassIdentifier: Assembly-CSharp::MouseLook
   sensitivity: 0.1
   smoothing: 10
-  maxLookAngle: 85
+  maxLookAngle: 30
 --- !u!114 &24092899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,10 +257,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShoot
   playerCamera: {fileID: 330585545}
-  projectilePrefab: {fileID: 2570426100457703374, guid: 1f75ed5fef147eb4d869d4b031b4fb32, type: 3}
+  projectilePrefab: {fileID: 2983666562048124430, guid: f29a238e5336e4c429a81c7164de4732, type: 3}
   shootForce: 25
   fireRate: 0.3
   gunAnimator: {fileID: 809632598}
+  gunExplosion: {fileID: 377255468}
+--- !u!114 &24092901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 24092894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 177f32a51a2e4174887e75ef3f8ea77d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  maxHealth: 100
+  currentHealth: 0
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,7 +313,7 @@ Camera:
   m_GameObject: {fileID: 330585543}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.25157225, g: 0.25157225, b: 0.25157225, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -420,6 +436,103 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &377255464
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 377255465}
+  - component: {fileID: 377255467}
+  - component: {fileID: 377255466}
+  - component: {fileID: 377255468}
+  m_Layer: 5
+  m_Name: Explosion
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &377255465
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 377255464}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 809632597}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -100, y: 115}
+  m_SizeDelta: {x: 640, y: 640}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &377255466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 377255464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 0
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -564035583, guid: 4dea2e2ec8fc00b45ae864fa3e851b24, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &377255467
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 377255464}
+  m_CullTransparentMesh: 1
+--- !u!114 &377255468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 377255464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ab1a76b8a452b144bfcd50404d720ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GunExplosion
+  image: {fileID: 377255466}
+  frames:
+  - {fileID: -564035583, guid: 4dea2e2ec8fc00b45ae864fa3e851b24, type: 3}
+  - {fileID: 1469260738, guid: 4dea2e2ec8fc00b45ae864fa3e851b24, type: 3}
+  - {fileID: 1944060214, guid: 4dea2e2ec8fc00b45ae864fa3e851b24, type: 3}
+  - {fileID: 2041873551, guid: 4dea2e2ec8fc00b45ae864fa3e851b24, type: 3}
+  - {fileID: 2132436688, guid: 4dea2e2ec8fc00b45ae864fa3e851b24, type: 3}
+  - {fileID: -777862073, guid: 4dea2e2ec8fc00b45ae864fa3e851b24, type: 3}
+  flashDuration: 0.03
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -690,6 +803,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 377255465}
   - {fileID: 1603504935}
   m_Father: {fileID: 1241602104}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1038,7 +1152,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ff0f52fd433c1fa43964910257c10f67, type: 2}
+  - {fileID: 2100000, guid: f28da4a511e32f54696eb03be54726eb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1339,7 +1453,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: d99ad860a5ef2c84b8b33cf6e8bcdf5d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6da307e397454374d8b06684f4c1d2bc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1487,6 +1601,7 @@ GameObject:
   - component: {fileID: 1892678114}
   - component: {fileID: 1892678113}
   - component: {fileID: 1892678118}
+  - component: {fileID: 1892678119}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -1610,7 +1725,7 @@ Transform:
   m_GameObject: {fileID: 1892678112}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 7.53}
+  m_LocalPosition: {x: 0, y: 1, z: 28.57}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1630,6 +1745,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maxHealth: 50
+--- !u!114 &1892678119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892678112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f380a702b3f0bcd4b9c099a1f3ceedae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyShoot
+  player: {fileID: 24092895}
+  projectilePrefab: {fileID: 2983666562048124430, guid: 8d8ca4192e6f5dd488343304c34d6144, type: 3}
+  shootForce: 18
+  fireRate: 1.5
+  projectileSpawnHeight: 0.4
+  shootRange: 22
 --- !u!1 &2055310807
 GameObject:
   m_ObjectHideFlags: 0

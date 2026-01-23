@@ -4,9 +4,9 @@ using UnityEngine.InputSystem;
 public class MouseLook : MonoBehaviour
 {
     [Header("Settings")]
-    public float sensitivity = 1.5f;
+    public float sensitivity = 0.1f;
     public float smoothing = 10f;
-    public float maxLookAngle = 85f;
+    public float maxLookAngle = 30f;
 
     private float yaw;
     private float pitch;

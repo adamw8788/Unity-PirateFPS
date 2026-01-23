@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class EnemyProjectile : MonoBehaviour
 {
-    public int damage = 10;
     public float lifetime = 5f;
+    public int damage = 10;
 
     private bool hasHit = false;
 
@@ -17,14 +17,16 @@ public class Projectile : MonoBehaviour
         if (hasHit) return;
         hasHit = true;
 
-        EnemyHealth enemy = collision.gameObject.GetComponent<EnemyHealth>();
+        PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
 
-        if (enemy != null)
+        if (playerHealth != null)
         {
-            enemy.TakeDamage(damage);
+            playerHealth.TakeDamage(damage);
         }
 
         Destroy(gameObject);
     }
-}
+} 
+
+
 
